@@ -28,32 +28,28 @@ public class CameraNavigation : MonoBehaviour {
 
 	void LateUpdate () 
 	{
-		if (Input.touchCount == 2)
+		if (GameObject.Find("Rotate Button").GetComponent<UICommands>().pressed && Input.touchCount == 2)
 		{
-			cameraRotation();
+            drawFinger = GameObject.Find("Rotate Button").GetComponent<UICommands>().DrawFinger;
+            cameraRotation();
 		}
-		cameraRigTransform();
+        if (GameObject.Find("Zoom Button").GetComponent<UICommands>().pressed && Input.touchCount == 2)
+        {
+            drawFinger = GameObject.Find("Zoom Button").GetComponent<UICommands>().DrawFinger;
+            cameraZoomTypeB();
+        }
+        cameraRigTransform();
 	}
 
-	public void SetDrawFinger()
+	public void cameraRotation()
 	{
-		if (Input.touchCount >= 2)
-			drawFinger = 0;
-		if (Input.touchCount == 1)
-			drawFinger = 1;
-		Debug.Log(drawFinger);
-	}
+		
+		_LocalRotation.x += Input.GetTouch(drawFinger).deltaPosition.x * OrbitSensitivity * Time.deltaTime;
+		_LocalRotation.y -= Input.GetTouch(drawFinger).deltaPosition.y * OrbitSensitivity * Time.deltaTime;
 
-	public void cameraRotation(bool can)
-	{
-		if (can)
-		{
-			_LocalRotation.x += Input.GetTouch(drawFinger).deltaPosition.x * OrbitSensitivity * Time.deltaTime;
-			_LocalRotation.y -= Input.GetTouch(drawFinger).deltaPosition.y * OrbitSensitivity * Time.deltaTime;
-
-			//Clamp the y Rotation to horizon and not flipping over at the top
-			_LocalRotation.y = Mathf.Clamp(_LocalRotation.y, 5f, 90f);
-		}
+		//Clamp the y Rotation to horizon and not flipping over at the top
+		_LocalRotation.y = Mathf.Clamp(_LocalRotation.y, 5f, 90f);
+		
 	}
 
 	void cameraZoomTypeA()
@@ -83,7 +79,7 @@ public class CameraNavigation : MonoBehaviour {
 
 	void cameraZoomTypeB()
 	{
-		float ZoomAmount = -Input.GetTouch (0).deltaPosition.y * ZoomSensitivity;
+		float ZoomAmount = -Input.GetTouch (drawFinger).deltaPosition.y * ZoomSensitivity;
 
 		//Makes camera zoom faster the further away it is from the target
 		ZoomAmount *= (this._CameraDistance * 0.3f);

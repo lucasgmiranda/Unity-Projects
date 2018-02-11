@@ -5,39 +5,47 @@ using UnityEngine.EventSystems;
 public class UICommands : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler {
 
 	private bool DrawFingerAlreadyDown;
+    private int drawFinger;
 
-	public bool CanZoom { get; private set; }
-	public bool CanRotate { get; private set; }
+	public bool pressed { get; private set; }
 	public int DrawFinger { get; private set; }
 
 	public void OnPointerDown (PointerEventData eventData)
 	{
 		if (DrawFingerAlreadyDown) return;
-		DrawFinger = eventData.pointerId;
+		drawFinger = eventData.pointerId;
 		DrawFingerAlreadyDown = true;
 
-		if (eventData.selectedObject == GameObject.Find ("Rotate Button")) 
-			CanRotate = true;
-		else if (eventData.selectedObject == GameObject.Find ("Zoom Button")) 
-			CanZoom = true;
+        SetDrawFinger();
+        pressed = true;
+
 	}
 
 	public void OnDrag (PointerEventData eventData)
 	{
 		if (DrawFingerAlreadyDown == false)
 			return;
-		if ( DrawFinger != eventData.pointerId )
+		if ( drawFinger != eventData.pointerId )
 			return;
 	}
 		
 	public void OnPointerUp (PointerEventData eventData)
 	{
-		if (DrawFinger != eventData.pointerId)
+		if (drawFinger != eventData.pointerId)
 			return;
 
 		DrawFingerAlreadyDown = false;
 
-		//GameObject.Find ("Main Camera").GetComponent<CameraNavigation> ().canRotate = false;
-		//GameObject.Find ("Main Camera").GetComponent<CameraNavigation> ().canZoom = false;
-	}
+        pressed = false;
+    }
+
+    public void SetDrawFinger()
+    {
+        if (drawFinger == 1)
+            DrawFinger = 0;
+        else if (drawFinger == 0)
+            DrawFinger = 1;
+    }
 }
+
+

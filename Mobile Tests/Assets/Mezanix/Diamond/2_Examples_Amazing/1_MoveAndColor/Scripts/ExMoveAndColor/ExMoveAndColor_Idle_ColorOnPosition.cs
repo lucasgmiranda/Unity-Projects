@@ -1,0 +1,66 @@
+using UnityEngine;
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace ScriptsCreatedByDiamond 
+{
+	public class ExMoveAndColor_Idle_ColorOnPosition 
+	{
+		public ExMoveAndColor_Idle_ColorOnPosition_Position exMoveAndColor_Idle_ColorOnPosition_Position;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_16_AM_5734 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_16_AM_5734;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_14_26_AM_3386 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_14_26_AM_3386;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_39_AM_0886 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_39_AM_0886;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_15_42_AM_6474 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_15_42_AM_6474;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_15_AM_6342 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_15_AM_6342;
+		public ExMoveAndColor_Idle_ColorOnPosition_PositionToVector4 exMoveAndColor_Idle_ColorOnPosition_PositionToVector4;
+		public ExMoveAndColor_Idle_ColorOnPosition_Vector4ToColor exMoveAndColor_Idle_ColorOnPosition_Vector4ToColor;
+		public ExMoveAndColor_Idle_ColorOnPosition_ApplyColorOnMaterial exMoveAndColor_Idle_ColorOnPosition_ApplyColorOnMaterial;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_37_AM_0755 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_37_AM_0755;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_59_AM_2213 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_59_AM_2213;
+		public ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_17_28_AM_6030 exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_17_28_AM_6030;
+		public ExMoveAndColor_Idle_ColorOnPosition_NormalizedPosition exMoveAndColor_Idle_ColorOnPosition_NormalizedPosition;
+		
+		public ExMoveAndColor_Idle exMoveAndColor_Idle;
+
+		public ExMoveAndColor_Idle_ColorOnPosition (ExMoveAndColor_Idle setExMoveAndColor_Idle)
+		{
+			exMoveAndColor_Idle = setExMoveAndColor_Idle;
+
+			exMoveAndColor_Idle_ColorOnPosition_Position = new ExMoveAndColor_Idle_ColorOnPosition_Position (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_16_AM_5734 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_16_AM_5734 (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_14_26_AM_3386 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_14_26_AM_3386 (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_39_AM_0886 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_39_AM_0886 (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_15_42_AM_6474 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_15_42_AM_6474 (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_15_AM_6342 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_15_AM_6342 (this);
+			exMoveAndColor_Idle_ColorOnPosition_PositionToVector4 = new ExMoveAndColor_Idle_ColorOnPosition_PositionToVector4 (this);
+			exMoveAndColor_Idle_ColorOnPosition_Vector4ToColor = new ExMoveAndColor_Idle_ColorOnPosition_Vector4ToColor (this);
+			exMoveAndColor_Idle_ColorOnPosition_ApplyColorOnMaterial = new ExMoveAndColor_Idle_ColorOnPosition_ApplyColorOnMaterial (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_37_AM_0755 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_37_AM_0755 (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_59_AM_2213 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_59_AM_2213 (this);
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_17_28_AM_6030 = new ExMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_17_28_AM_6030 (this);
+			exMoveAndColor_Idle_ColorOnPosition_NormalizedPosition = new ExMoveAndColor_Idle_ColorOnPosition_NormalizedPosition (this);
+		}
+
+		public void LogicUpdate ()
+		{
+			exMoveAndColor_Idle_ColorOnPosition_Position.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_16_AM_5734.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_14_26_AM_3386.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_13_39_AM_0886.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_15_42_AM_6474.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_15_AM_6342.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_PositionToVector4.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_Vector4ToColor.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_ApplyColorOnMaterial.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_37_AM_0755.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_16_59_AM_2213.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_8_4_2017_9_17_28_AM_6030.LogicNodeUpdate ();
+			exMoveAndColor_Idle_ColorOnPosition_NormalizedPosition.LogicNodeUpdate ();
+		}
+
+		public void IAmHere ()
+		{
+		}	}
+}

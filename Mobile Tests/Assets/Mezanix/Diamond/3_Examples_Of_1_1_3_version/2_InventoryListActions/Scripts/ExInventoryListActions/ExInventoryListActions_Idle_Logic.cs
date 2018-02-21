@@ -1,0 +1,51 @@
+using UnityEngine;
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace ScriptsCreatedByDiamond 
+{
+	public class ExInventoryListActions_Idle_Logic 
+	{
+		public ExInventoryListActions_Idle_Logic_9_10_2017_4_15_11_PM_6138 exInventoryListActions_Idle_Logic_9_10_2017_4_15_11_PM_6138;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_1_03_55_PM_2253 exInventoryListActions_Idle_Logic_9_10_2017_1_03_55_PM_2253;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_1_10_05_PM_6744 exInventoryListActions_Idle_Logic_9_10_2017_1_10_05_PM_6744;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_1_04_24_PM_2638 exInventoryListActions_Idle_Logic_9_10_2017_1_04_24_PM_2638;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_4_15_47_PM_0650 exInventoryListActions_Idle_Logic_9_10_2017_4_15_47_PM_0650;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_1_09_08_PM_6431 exInventoryListActions_Idle_Logic_9_10_2017_1_09_08_PM_6431;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_1_15_33_PM_7155 exInventoryListActions_Idle_Logic_9_10_2017_1_15_33_PM_7155;
+		public ExInventoryListActions_Idle_Logic_9_10_2017_1_17_23_PM_0625 exInventoryListActions_Idle_Logic_9_10_2017_1_17_23_PM_0625;
+		
+		public ExInventoryListActions_Idle exInventoryListActions_Idle;
+
+		public ExInventoryListActions_Idle_Logic (ExInventoryListActions_Idle setExInventoryListActions_Idle)
+		{
+			exInventoryListActions_Idle = setExInventoryListActions_Idle;
+
+			exInventoryListActions_Idle_Logic_9_10_2017_4_15_11_PM_6138 = new ExInventoryListActions_Idle_Logic_9_10_2017_4_15_11_PM_6138 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_1_03_55_PM_2253 = new ExInventoryListActions_Idle_Logic_9_10_2017_1_03_55_PM_2253 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_1_10_05_PM_6744 = new ExInventoryListActions_Idle_Logic_9_10_2017_1_10_05_PM_6744 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_1_04_24_PM_2638 = new ExInventoryListActions_Idle_Logic_9_10_2017_1_04_24_PM_2638 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_4_15_47_PM_0650 = new ExInventoryListActions_Idle_Logic_9_10_2017_4_15_47_PM_0650 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_1_09_08_PM_6431 = new ExInventoryListActions_Idle_Logic_9_10_2017_1_09_08_PM_6431 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_1_15_33_PM_7155 = new ExInventoryListActions_Idle_Logic_9_10_2017_1_15_33_PM_7155 (this);
+			exInventoryListActions_Idle_Logic_9_10_2017_1_17_23_PM_0625 = new ExInventoryListActions_Idle_Logic_9_10_2017_1_17_23_PM_0625 (this);
+		}
+
+		public void LogicUpdate ()
+		{
+			exInventoryListActions_Idle_Logic_9_10_2017_4_15_11_PM_6138.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_1_03_55_PM_2253.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_1_10_05_PM_6744.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_1_04_24_PM_2638.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_4_15_47_PM_0650.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_1_09_08_PM_6431.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_1_15_33_PM_7155.LogicNodeUpdate ();
+			exInventoryListActions_Idle_Logic_9_10_2017_1_17_23_PM_0625.LogicNodeUpdate ();
+		}
+
+		public void IAmHere ()
+		{
+		}	}
+}

@@ -1,0 +1,19 @@
+left click: select node
+right click on the workspace: options
+middle click and drag: pan (move all node)
+
+Zoom:
+cursor inside the node + mouse wheel: zoom out/in
+cursor inside the workspace + alt/option + mouse wheel: zoom out/in for all nodes
+
+Linking:
+No need to drag, left click once in your input or output triangle
+and Diamond will draw a link ended at your mouse cursor. 
+All you have to do is to move your mouse to the destination and
+it will be linked if the types between input and output matches.
+P.S. Since you don't need to drag for linking you can use your
+middle mouse button to pan and to link with a far node for example.
+
+Moving several nodes:
+Left click and drag a rectangle to select nodes,
+then hold alt/option key and move your nodes with arrow keys.

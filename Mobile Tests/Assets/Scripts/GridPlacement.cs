@@ -12,7 +12,7 @@ public class GridPlacement : MonoBehaviour {
 
 	void Update () 
 	{
-		if (Input.touchCount > 0 && UIManager.Instance.placeObj)
+		if (Input.touchCount > 0 && UIManager.Inst.buttonsData["PlaceObj"]._switch && !UIManager.Inst.SomeButtonPressed())
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 			int layerMask = 1 << 8;
@@ -21,7 +21,13 @@ public class GridPlacement : MonoBehaviour {
 			{
 				GridHighlight();
 			}
+			
 			ObjPlacement();
+		}
+		if (UIManager.Inst.SomeButtonPressed() && gridHighlightInst != null)
+		{
+			Destroy(gridHighlightInst);
+			instantiated = false;
 		}
 	}
 
@@ -55,6 +61,7 @@ public class GridPlacement : MonoBehaviour {
 		{
 			Destroy(gridHighlightInst);
 			instantiated = false;
+			hitInfoToPlace.transform.GetComponent<MeshRenderer>().enabled = false;
 			GameObject ObjToPlaceInst = Instantiate(ObjToPlace, ObjOnGridPosition(ObjToPlace, hitInfoToPlace), hitInfoToPlace.transform.rotation);
 			ObjToPlaceInst.transform.SetParent(hitInfoToPlace.transform);
 			hitInfoToPlace.transform.GetComponent<CellData>().objPlaced = true;
@@ -65,10 +72,10 @@ public class GridPlacement : MonoBehaviour {
 	{
 		Vector3 V3Aux = obj.transform.localScale;
 
-		V3Aux.x = obj.transform.localScale.x * hit.normal.x;
-		V3Aux.y = obj.transform.localScale.y * hit.normal.y + hit.transform.localScale.y;
-		V3Aux.z = obj.transform.localScale.z * hit.normal.z;
+		V3Aux.x = obj.transform.localScale.x * hit.normal.x / 2f;
+		V3Aux.y = hit.point.y;
+		V3Aux.z = obj.transform.localScale.z * hit.normal.z / 2f;
 
-		return hit.transform.position + V3Aux / 2f;
+		return hit.transform.position + V3Aux;
 	}
 }

@@ -70,14 +70,14 @@ Shader "PBR Master"
 			#include "CoreRP/ShaderLibrary/UnityInstancing.hlsl"
 			#include "ShaderGraphLibrary/Functions.hlsl"
 		
-								float4 _PBRMaster_E2FE968F_Albedo;
-							float4 _PBRMaster_E2FE968F_Normal;
-							float4 _PBRMaster_E2FE968F_Emission;
-							float _PBRMaster_E2FE968F_Metallic;
-							float _PBRMaster_E2FE968F_Smoothness;
-							float _PBRMaster_E2FE968F_Occlusion;
-							float _PBRMaster_E2FE968F_Alpha;
-							float _PBRMaster_E2FE968F_AlphaClipThreshold;
+								float4 _PBRMaster_FC483A99_Albedo;
+							float4 _PBRMaster_FC483A99_Normal;
+							float4 _PBRMaster_FC483A99_Emission;
+							float _PBRMaster_FC483A99_Metallic;
+							float _PBRMaster_FC483A99_Smoothness;
+							float _PBRMaster_FC483A99_Occlusion;
+							float _PBRMaster_FC483A99_Alpha;
+							float _PBRMaster_FC483A99_AlphaClipThreshold;
 					
 							struct SurfaceInputs{
 							};
@@ -108,14 +108,14 @@ Shader "PBR Master"
 					
 							SurfaceDescription PopulateSurfaceData(SurfaceInputs IN) {
 								SurfaceDescription surface = (SurfaceDescription)0;
-								surface.Albedo = _PBRMaster_E2FE968F_Albedo;
-								surface.Normal = _PBRMaster_E2FE968F_Normal;
-								surface.Emission = _PBRMaster_E2FE968F_Emission;
-								surface.Metallic = _PBRMaster_E2FE968F_Metallic;
-								surface.Smoothness = _PBRMaster_E2FE968F_Smoothness;
-								surface.Occlusion = _PBRMaster_E2FE968F_Occlusion;
-								surface.Alpha = _PBRMaster_E2FE968F_Alpha;
-								surface.AlphaClipThreshold = _PBRMaster_E2FE968F_AlphaClipThreshold;
+								surface.Albedo = _PBRMaster_FC483A99_Albedo;
+								surface.Normal = _PBRMaster_FC483A99_Normal;
+								surface.Emission = _PBRMaster_FC483A99_Emission;
+								surface.Metallic = _PBRMaster_FC483A99_Metallic;
+								surface.Smoothness = _PBRMaster_FC483A99_Smoothness;
+								surface.Occlusion = _PBRMaster_FC483A99_Occlusion;
+								surface.Alpha = _PBRMaster_FC483A99_Alpha;
+								surface.AlphaClipThreshold = _PBRMaster_FC483A99_AlphaClipThreshold;
 								return surface;
 							}
 					

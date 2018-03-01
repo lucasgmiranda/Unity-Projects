@@ -2,27 +2,27 @@
 
 public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-	public static T Instance
+	public static T Inst
 	{
 		get
 		{
-			if (instance == null)
+			if (inst == null)
 			{
 				GameObject coreGameObject = new GameObject(typeof(T).Name);
 
-				instance = coreGameObject.AddComponent<T>();
+				inst = coreGameObject.AddComponent<T>();
 			}
 
-			return instance;
+			return inst;
 		}
 	}
 
-	private static T instance;
+	private static T inst;
 
 	protected virtual void Awake()
 	{
-		if (instance == null)
-			instance = GetComponent<T>();
+		if (inst == null)
+			inst = GetComponent<T>();
 		else
 			DestroyImmediate(this);
 	}

@@ -33,11 +33,11 @@ public class CameraNavigation : MonoBehaviour {
 	{
 		if (Input.touchCount == 2)
 		{
-			if (UIManager.Instance.rotate)
+			if (UIManager.Inst.buttonsData["Rotate"]._hold)
 			{
 				cameraRotation();
 			}
-			if (UIManager.Instance.zoom)
+			if (UIManager.Inst.buttonsData["Zoom"]._hold)
 			{
 				cameraZoomTypeB();
 			}

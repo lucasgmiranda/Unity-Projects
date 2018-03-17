@@ -14,7 +14,13 @@ public class GridPlacement : MonoBehaviour {
 	{
 		if (Input.touchCount > 0 && UIManager.Inst.buttonsData["PlaceObj"]._switch && !UIManager.Inst.SomeButtonPressed())
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+			Ray ray;
+
+			if (Input.touchSupported)
+				ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+			else
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
 			int layerMask = 1 << 8;
 
 			if (Physics.Raycast(ray, out hitInfo, 1000.0f, layerMask))

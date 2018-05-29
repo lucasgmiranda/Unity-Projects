@@ -9,8 +9,8 @@ public class ETFXFireProjectile : MonoBehaviour
     RaycastHit hit;
     public GameObject[] projectiles;
     public Transform spawnPosition;
-    [HideInInspector]
-    public int currentProjectile = 0;
+   // [HideInInspector]
+    public int currentProjectile = 25;
 	public float speed = 1000;
 
 //    MyGUI _GUI;
@@ -18,7 +18,7 @@ public class ETFXFireProjectile : MonoBehaviour
 
 	void Start () 
 	{
-		selectedProjectileButton = GameObject.Find("Button").GetComponent<ETFXButtonScript>();
+		//selectedProjectileButton = GameObject.Find("Button").GetComponent<ETFXButtonScript>();
 	}
 
 	void Update () 
@@ -42,22 +42,19 @@ public class ETFXFireProjectile : MonoBehaviour
             previousEffect();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-
-			if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100f))
-                {
-                    GameObject projectile = Instantiate(projectiles[currentProjectile], spawnPosition.position, Quaternion.identity) as GameObject;
-                    projectile.transform.LookAt(hit.point);
-                    projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * speed);
-                    projectile.GetComponent<ETFXProjectileScript>().impactNormal = hit.normal;
-                }  
-            }
-
-        }
-        Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction*100, Color.yellow);
+		for (int i = 0; i < Input.touchCount; ++i)
+		{
+			if (Input.GetTouch(0).phase == TouchPhase.Began)
+			{
+				Vector3 touchPos = Input.GetTouch(0).position;
+				touchPos.z = 10;
+				Vector3 projectileTarget = Camera.main.ScreenToWorldPoint(touchPos);
+				GameObject projectile = Instantiate(projectiles[currentProjectile], spawnPosition.position, Quaternion.identity) as GameObject;
+				projectile.transform.LookAt(projectileTarget);
+				projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * speed);
+			}
+		}       
+        //Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction*100, Color.yellow);
 	}
 
     public void nextEffect()

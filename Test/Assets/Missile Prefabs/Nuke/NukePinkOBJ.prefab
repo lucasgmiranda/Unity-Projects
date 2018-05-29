@@ -38,13 +38,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128572}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!114 &11464288
 MonoBehaviour:
@@ -57,6 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd27932048c3254597a02078fa2cb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifespan: 3
+  explosionPower: 15
+  radius: 5
+  upForce: 1
   impactParticle: {fileID: 120316, guid: ba31194ef34f22e49a0a0b1f178dc13c, type: 2}
   projectileParticle: {fileID: 120178, guid: b9990a2c3cb466040810b13396d4ee2f, type: 2}
   muzzleParticle: {fileID: 136200, guid: 9ca084bd9f039344faacb8e93f01f317, type: 2}

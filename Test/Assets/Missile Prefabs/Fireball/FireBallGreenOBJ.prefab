@@ -57,6 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd27932048c3254597a02078fa2cb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifespan: 5
+  explosionPower: 10
+  radius: 5
+  upForce: 1
   impactParticle: {fileID: 150592, guid: 2c82b2af38b82f442bd9a24539b8d33c, type: 2}
   projectileParticle: {fileID: 122746, guid: 2600ac3c92a32344aac7a38b64dc2f5c, type: 2}
   muzzleParticle: {fileID: 132130, guid: db3d9495050fd0541a5cf71c72d85e54, type: 2}

@@ -2,68 +2,75 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-namespace EpicToonFX
+public class FireProjectileV2 : MonoBehaviour 
 {
-	public class FireProjectileV2 : MonoBehaviour 
+	public RaycastHit targetHit;	
+	public GameObject[] projectiles;
+	public Transform spawnPosition;
+	public GameObject targetTexture;
+	GameObject targetTextureInst;
+	StaminaSystem stamina;
+	UIButtonData fireButton;
+
+	public int currentProjectile = 0;
+	public float speed = 1000;	
+
+	public struct LaunchData
 	{
-		private RaycastHit target;	
-		public GameObject[] projectiles;
-		public Transform spawnPosition;
-		public GameObject targetTexture;
-		GameObject targetTextureInst;
-		// [HideInInspector]
-		public int currentProjectile = 0;
-		public float speed = 1000;
-		public bool debugPath;
+		public Vector3 toTarget, velocity;
+		public float gSquared, b, discriminant;
+	}
+	public LaunchData launchData;
 
-		public struct LaunchData
+	void Start()
+	{
+		targetTextureInst = Instantiate(targetTexture);
+		stamina = GameObject.Find("Stamina Bar").GetComponent<StaminaSystem>();
+		fireButton = GameObject.Find("Fire Button").GetComponent<UIButtonData>();
+	}
+
+	void Update () 
+	{
+		Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
+
+		Debug.DrawRay(Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)).origin, 
+						Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)).direction * 100, Color.yellow);
+
+		if (Physics.Raycast(ray, out targetHit, 1000f, 1<<9))
 		{
-			public Vector3 toTarget;
-			public float gSquared, b, discriminant;
-		}
-		LaunchData launchData;
+			targetTextureInst.transform.position = targetHit.point + new Vector3(0, 1.5f, 0);
 
-		void Start()
-		{
-			targetTextureInst = Instantiate(targetTexture);
-		}
+			CalculateLaunchData();
 
-		void Update () 
-		{
-			Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
-
-			Debug.DrawRay(Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)).origin, 
-						  Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)).direction * 100, Color.yellow);
-
-			int layerMask = 1 << 9;
-
-			if (Physics.Raycast(ray, out target, 1000f, layerMask))
-			{
-				targetTextureInst.transform.position = target.point + new Vector3(0, 1.5f, 0);
-
-				CalculateLaunchData();
-
-				if (launchData.discriminant < 0)
-					targetTextureInst.GetComponent<Light>().color = Color.red;
-				else
-					targetTextureInst.GetComponent<Light>().color = Color.cyan;
-
-				if (Input.touches.Length > 1)
-				{
-					if (Input.GetTouch(1).phase == TouchPhase.Began)
-					{
-						if (launchData.discriminant < 0)
-						{
-							Debug.Log("Target is too far away to target at this speed");
-							// Abort, or fire at max speed in its general direction?
-						}
-						else Launch();
-					}
-				}
+			if (fireButton._click)
+			{				
+				if (launchData.discriminant > 0 && stamina.canFire(1f))
+				{						
+					Launch();
+					stamina.decreaseValue(1f);
+				}				
 			}
 		}
+	}	
+	
+	void Launch()
+	{
+		GameObject projectile = Instantiate(projectiles[currentProjectile], spawnPosition.position, Quaternion.identity) as GameObject;
+		projectile.transform.LookAt(launchData.velocity);
+		// Apply the calculated velocity (do not use force, acceleration, or impulse modes)
+		projectile.GetComponent<Rigidbody>().AddForce(launchData.velocity, ForceMode.VelocityChange);			
+	}
 
-		void Launch()
+	void CalculateLaunchData()
+	{
+		launchData.toTarget = targetHit.point - transform.position;
+
+		// Set up the terms we need to solve the quadratic equations.
+		launchData.gSquared = Physics.gravity.sqrMagnitude;
+		launchData.b = speed * speed + Vector3.Dot(launchData.toTarget, Physics.gravity);
+		launchData.discriminant = launchData.b * launchData.b - launchData.gSquared * launchData.toTarget.sqrMagnitude;
+
+		if (launchData.discriminant >= 0)
 		{
 			float discRoot = Mathf.Sqrt(launchData.discriminant);
 
@@ -79,22 +86,10 @@ namespace EpicToonFX
 			float time = time_min; // choose T_max, T_min, or some T in-between like T_lowEnergy
 
 			// Convert from time-to-target to a launch velocity:
-			Vector3 velocity = launchData.toTarget / time - Physics.gravity * time / 2f;
+			launchData.velocity = launchData.toTarget / time - Physics.gravity * time / 2f;
 
-			GameObject projectile = Instantiate(projectiles[currentProjectile], spawnPosition.position, Quaternion.identity) as GameObject;
-			projectile.transform.LookAt(velocity);
-			// Apply the calculated velocity (do not use force, acceleration, or impulse modes)
-			projectile.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.VelocityChange);			
+			targetTextureInst.GetComponent<Light>().color = Color.cyan;
 		}
-
-		void CalculateLaunchData()
-		{
-			launchData.toTarget = target.point - transform.position;
-
-			// Set up the terms we need to solve the quadratic equations.
-			launchData.gSquared = Physics.gravity.sqrMagnitude;
-			launchData.b = speed * speed + Vector3.Dot(launchData.toTarget, Physics.gravity);
-			launchData.discriminant = launchData.b * launchData.b - launchData.gSquared * launchData.toTarget.sqrMagnitude;
-		}		
+		else targetTextureInst.GetComponent<Light>().color = Color.red;
 	}
 }

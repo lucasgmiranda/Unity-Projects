@@ -1,46 +1,63 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CameraNavigation : MonoBehaviour {
 
 	private Transform myCamera;
 	private Transform cameraRig02, cameraRig01;
-
+	
 	private Vector3 _LocalRotation;
 	
+	[Header("Orbit")]
 	public float OrbitSensitivity = 4f;
 	public float OrbitDampening = 5f;
+	public float StartAngle = 10f;
+	public float MinAngle = 0f;
+	public float MaxAngle = 90f;
+	[Header("Zoom")]
 	public float ZoomSensitivity = 10f;
 	public float ZoomDampening = 10f;
 	public float StartZoom = 10f;
 	public float MinZoom = 5f;
 	public float MaxZoom = 25f;
 
+	int rotationFinger;
+
 	void Start () 
 	{
 		myCamera = transform;
 		cameraRig02 = transform.parent;
 		cameraRig01 = cameraRig02.transform.parent;
+		_LocalRotation.y = StartAngle;
 	}
 
 	void LateUpdate () 
 	{
-		if(Input.touchCount == 1) 
-			cameraRotation();
-		
-		if(Input.touchCount > 1) 
-			cameraZoom();
+		if (Input.touchCount == 2)
+		{
+			SetRotationFinger();
+			if(!EventSystem.current.IsPointerOverGameObject(rotationFinger))
+				cameraRotation();
+		}
+
+		if (Input.touchCount == 1)
+		{
+			rotationFinger = 0;
+			if (!EventSystem.current.IsPointerOverGameObject(rotationFinger))
+				cameraRotation();
+		}
 
 		cameraRigTransform();
 	}
 
 	void cameraRotation()
 	{
-		_LocalRotation.x += Input.GetTouch(0).deltaPosition.x * OrbitSensitivity * Time.deltaTime;
-		_LocalRotation.y -= Input.GetTouch(0).deltaPosition.y * OrbitSensitivity * Time.deltaTime;
+		_LocalRotation.x += Input.GetTouch(rotationFinger).deltaPosition.x * OrbitSensitivity * Time.deltaTime;
+		_LocalRotation.y -= Input.GetTouch(rotationFinger).deltaPosition.y * OrbitSensitivity * Time.deltaTime;
 
 		//Clamp the y Rotation to horizon and not flipping over at the top
-		_LocalRotation.y = Mathf.Clamp(_LocalRotation.y, 0f, 90f);
+		_LocalRotation.y = Mathf.Clamp(_LocalRotation.y, MinAngle, MaxAngle);
 	}
 
 	void cameraZoom()
@@ -79,6 +96,14 @@ public class CameraNavigation : MonoBehaviour {
 		if ( myCamera.localPosition.z != StartZoom * -1f )
 		{
 			myCamera.localPosition = new Vector3(0f, 0f, Mathf.Lerp(myCamera.localPosition.z, this.StartZoom * -1f, Time.deltaTime * ZoomDampening));
+		}
+	}
+	public void SetRotationFinger()
+	{
+		for (int i = 0; i < Input.touchCount; i++)
+		{
+			if (Input.GetTouch(i).position.x > Screen.width / 2)
+				rotationFinger = i;
 		}
 	}
 }

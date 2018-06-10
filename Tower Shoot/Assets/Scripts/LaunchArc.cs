@@ -9,7 +9,7 @@ public class LaunchArc : MonoBehaviour
 	public float timeResolution = 0.02f;
 	public float maxTime = 10.0f;
 	public float startPoint = 0;
-
+	
 	LineRenderer lineRenderer;
 	float discriminant;
 
@@ -35,9 +35,10 @@ public class LaunchArc : MonoBehaviour
 
 			for (float t = 0f; t < maxTime; t += timeResolution)
 			{
-				if(index == 1)
+				if (index == 1)
+				{
 					lineRenderer.SetPosition(index - 1, currentPosition);
-				
+				}
 				lineRenderer.SetPosition(index, currentPosition);
 
 				RaycastHit hit;

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour {
 
-	public GameObject pauseMenuUI;
+	public GameObject PauseMenuUI;
+	public GameObject[] DisableOnPause;
 
 	public static bool GameIsPaused = false;
+	[HideInInspector]
+	public int DropdownIndex;
 
 	private void Awake()
 	{
-		QualitySettings.SetQualityLevel(3);
-		QualitySettings.vSyncCount = 1;
+		QualitySettings.vSyncCount = 0;
 	}
 
 	void Update()
@@ -27,15 +29,17 @@ public class PauseMenu : MonoBehaviour {
 
 	public void Resume()
 	{
+		EnableObjects();
 		GameIsPaused = false;
-		pauseMenuUI.SetActive(false);
+		PauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
 	}
 
 	public void Pause()
 	{
+		DisableObjects();
 		GameIsPaused = true;
-		pauseMenuUI.SetActive(true);
+		PauseMenuUI.SetActive(true);
 		Time.timeScale = 0f;
 	}
 
@@ -52,5 +56,25 @@ public class PauseMenu : MonoBehaviour {
 	public void Quit()
 	{
 		Application.Quit();
+	}
+
+	public void SetQualityLevel(int index)
+	{
+		QualitySettings.SetQualityLevel(index);
+	}
+
+	public void EnableObjects()
+	{
+		foreach (GameObject obj in DisableOnPause)
+		{
+			obj.SetActive(true);
+		}
+	}
+	public void DisableObjects()
+	{
+		foreach(GameObject obj in DisableOnPause)
+		{
+			obj.SetActive(false);
+		}
 	}
 }

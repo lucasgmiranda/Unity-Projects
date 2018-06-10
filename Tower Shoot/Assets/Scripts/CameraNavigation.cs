@@ -6,7 +6,6 @@ public class CameraNavigation : MonoBehaviour {
 
 	private Transform myCamera;
 	private Transform cameraRig02, cameraRig01;
-	
 	private Vector3 _LocalRotation;
 	
 	[Header("Orbit")]
@@ -32,7 +31,7 @@ public class CameraNavigation : MonoBehaviour {
 		_LocalRotation.y = StartAngle;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if (Input.touchCount == 2)
 		{
@@ -53,9 +52,8 @@ public class CameraNavigation : MonoBehaviour {
 
 	void cameraRotation()
 	{
-		_LocalRotation.x += Input.GetTouch(rotationFinger).deltaPosition.x * OrbitSensitivity * Time.deltaTime;
+		_LocalRotation.x += Input.GetTouch(rotationFinger).deltaPosition.x * OrbitSensitivity * Time.deltaTime; 
 		_LocalRotation.y -= Input.GetTouch(rotationFinger).deltaPosition.y * OrbitSensitivity * Time.deltaTime;
-
 		//Clamp the y Rotation to horizon and not flipping over at the top
 		_LocalRotation.y = Mathf.Clamp(_LocalRotation.y, MinAngle, MaxAngle);
 	}
@@ -90,6 +88,7 @@ public class CameraNavigation : MonoBehaviour {
 		//Actual Camera Rig Transformations
 		Quaternion QTcameraRig02 = Quaternion.Euler(_LocalRotation.y, 0, 0);
 		Quaternion QTcameraRig01 = Quaternion.Euler(0, _LocalRotation.x, 0);
+
 		cameraRig02.localRotation = Quaternion.Lerp(cameraRig02.localRotation, QTcameraRig02, Time.deltaTime * OrbitDampening);
 		cameraRig01.localRotation = Quaternion.Lerp(cameraRig01.localRotation, QTcameraRig01, Time.deltaTime * OrbitDampening);
 

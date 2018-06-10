@@ -4,7 +4,8 @@ using System.Collections;
 
 public class FireProjectileV2 : MonoBehaviour 
 {
-	public RaycastHit targetHit;	
+	public RaycastHit targetHit;
+	public GameObject raycaster;
 	public GameObject[] projectiles;
 	public Transform spawnPosition;
 	public GameObject targetTexture;
@@ -31,13 +32,18 @@ public class FireProjectileV2 : MonoBehaviour
 
 	void Update () 
 	{
-		Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
+		RaycastHit cameraHit;
+		Vector3 raycastOrigin = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - 1f, Camera.main.transform.position.z);
 
-		Debug.DrawRay(Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)).origin, 
-						Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2)).direction * 100, Color.yellow);
-
-		if (Physics.Raycast(ray, out targetHit, 1000f, 1<<9))
+		if (Physics.Raycast(raycastOrigin, Camera.main.transform.forward, out cameraHit, 100.0f, 1 << 10))
 		{
+			raycaster.transform.position = new Vector3(cameraHit.point.x, raycaster.transform.position.y, cameraHit.point.z);
+		}
+		Debug.DrawRay(raycastOrigin, Camera.main.transform.forward * 100, Color.yellow);
+		Debug.DrawRay(raycaster.transform.position, -Vector3.up * 100, Color.red);
+		if (Physics.Raycast(raycaster.transform.position, -Vector3.up, out targetHit, 20f, 1<<9))
+		{
+			
 			targetTextureInst.transform.position = targetHit.point;
 			targetTextureInst.transform.rotation = Quaternion.FromToRotation(targetTextureInst.transform.up, targetHit.normal) * targetTextureInst.transform.rotation;
 
@@ -79,12 +85,12 @@ public class FireProjectileV2 : MonoBehaviour
 			//float time_max = Mathf.Sqrt((launchData.b + discRoot) * 2f / launchData.gSquared);
 
 			// Most direct shot with the given max speed:
-			float time_min = Mathf.Sqrt((launchData.b - discRoot) * 2f / launchData.gSquared);
+			//float time_min = Mathf.Sqrt((launchData.b - discRoot) * 2f / launchData.gSquared);
 
 			// Lowest-speed arc available:
-			//float time_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(launchData.toTarget.sqrMagnitude * 4f / launchData.gSquared));
+			float time_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(launchData.toTarget.sqrMagnitude * 4f / launchData.gSquared));
 
-			float time = time_min; // choose T_max, T_min, or some T in-between like T_lowEnergy
+			float time = time_lowEnergy; // choose T_max, T_min, or some T in-between like T_lowEnergy
 
 			// Convert from time-to-target to a launch velocity:
 			launchData.velocity = launchData.toTarget / time - Physics.gravity * time / 2f;

@@ -13,7 +13,7 @@ public class StaminaSystem : MonoBehaviour {
 
 	void Start ()
 	{
-		fPS = GameObject.Find("GameFlow").GetComponent<showFPS>();
+		fPS = GameObject.Find("FPS Text").GetComponent<showFPS>();
 		slider = GetComponent<Slider>();
 	}
 	

@@ -11,7 +11,8 @@ public class ETFXProjectileScript : MonoBehaviour
     public GameObject projectileParticle;
     public GameObject muzzleParticle;
     public GameObject[] trailParticles;
-    [HideInInspector]
+	Transform launchSource;
+	[HideInInspector]
     public Vector3 impactNormal; //Used to rotate impactparticle.
  
     private bool hasCollided = false;
@@ -20,9 +21,12 @@ public class ETFXProjectileScript : MonoBehaviour
     {
 		StartCoroutine(Destroy());
 
+		launchSource = GameObject.Find("Launch Source").transform;
+		transform.rotation = launchSource.rotation;
+
 		projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
         projectileParticle.transform.parent = transform;
-
+		
 		if (muzzleParticle)
 		{
 			muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;

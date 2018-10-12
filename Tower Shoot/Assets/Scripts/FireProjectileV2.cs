@@ -9,12 +9,15 @@ public class FireProjectileV2 : MonoBehaviour
 	public GameObject[] projectiles;
 	public Transform spawnPosition;
 	public GameObject targetTexture;
+	public int currentProjectile = 0;
+	public float speed = 1000, lauchDelay;
+
+	[HideInInspector]
+	public bool projectileLaunched;
+
 	GameObject targetTextureInst;
 	StaminaSystem stamina;
 	UIButtonData fireButton;
-
-	public int currentProjectile = 0;
-	public float speed = 1000;	
 
 	public struct LaunchData
 	{
@@ -32,6 +35,8 @@ public class FireProjectileV2 : MonoBehaviour
 
 	void Update () 
 	{
+		projectileLaunched = false;
+
 		RaycastHit cameraHit;
 		Vector3 raycastOrigin = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - 1f, Camera.main.transform.position.z);
 
@@ -39,8 +44,10 @@ public class FireProjectileV2 : MonoBehaviour
 		{
 			raycaster.transform.position = new Vector3(cameraHit.point.x, raycaster.transform.position.y, cameraHit.point.z);
 		}
+
 		Debug.DrawRay(raycastOrigin, Camera.main.transform.forward * 100, Color.yellow);
 		Debug.DrawRay(raycaster.transform.position, -Vector3.up * 100, Color.red);
+
 		if (Physics.Raycast(raycaster.transform.position, -Vector3.up, out targetHit, 20f, 1<<9))
 		{
 			
@@ -52,9 +59,10 @@ public class FireProjectileV2 : MonoBehaviour
 			if (fireButton._click)
 			{				
 				if (launchData.discriminant > 0 && stamina.canFire(1f))
-				{						
-					Launch();
-					stamina.decreaseValue(1f);
+				{
+					StartCoroutine(LaunchDelay());
+					stamina.decreaseValue(0.6f);
+					projectileLaunched = true;
 				}				
 			}
 		}
@@ -62,10 +70,15 @@ public class FireProjectileV2 : MonoBehaviour
 	
 	void Launch()
 	{
-		GameObject projectile = Instantiate(projectiles[currentProjectile], spawnPosition.position, Quaternion.identity) as GameObject;
-		projectile.transform.LookAt(launchData.velocity);
+		GameObject projectile = Instantiate(projectiles[currentProjectile], transform.position, Quaternion.identity) as GameObject;
 		// Apply the calculated velocity (do not use force, acceleration, or impulse modes)
 		projectile.GetComponent<Rigidbody>().AddForce(launchData.velocity, ForceMode.VelocityChange);			
+	}
+
+	IEnumerator LaunchDelay()
+	{
+		yield return new WaitForSeconds(lauchDelay);
+		Launch();		
 	}
 
 	void CalculateLaunchData()
@@ -79,7 +92,7 @@ public class FireProjectileV2 : MonoBehaviour
 
 		if (launchData.discriminant >= 0)
 		{
-			float discRoot = Mathf.Sqrt(launchData.discriminant);
+			//float discRoot = Mathf.Sqrt(launchData.discriminant);
 
 			// Highest shot with the given max speed:
 			//float time_max = Mathf.Sqrt((launchData.b + discRoot) * 2f / launchData.gSquared);

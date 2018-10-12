@@ -13,7 +13,8 @@ public class PauseMenu : MonoBehaviour {
 
 	private void Awake()
 	{
-		QualitySettings.vSyncCount = 0;
+		QualitySettings.vSyncCount = 1;
+		SetQualityLevel(3);
 	}
 
 	void Update()

@@ -3,9 +3,9 @@
 --- !u!1 &128572
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 450904}
   - component: {fileID: 13576440}
@@ -21,7 +21,7 @@ GameObject:
 --- !u!4 &450904
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -34,7 +34,7 @@ Transform:
 --- !u!54 &5479992
 Rigidbody:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128572}
   serializedVersion: 2
@@ -49,7 +49,7 @@ Rigidbody:
 --- !u!114 &11464288
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128572}
   m_Enabled: 1
@@ -57,6 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd27932048c3254597a02078fa2cb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifespan: 0
+  explosionPower: 10
+  radius: 5
+  upForce: 1
   impactParticle: {fileID: 127350, guid: 44053fcf5ec3ddc429076f23c65685ef, type: 2}
   projectileParticle: {fileID: 123432, guid: 81ba803537470cd478e76c5d33b7e81e, type: 2}
   muzzleParticle: {fileID: 169982, guid: 83cbfdcec541739499bcee069cf124ad, type: 2}
@@ -65,7 +69,7 @@ MonoBehaviour:
 --- !u!135 &13576440
 SphereCollider:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128572}
   m_Material: {fileID: 0}
@@ -82,6 +86,6 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128572}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1

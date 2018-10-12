@@ -94,18 +94,18 @@ public class FireProjectileV2 : MonoBehaviour
 		{
 			//float discRoot = Mathf.Sqrt(launchData.discriminant);
 
-			// Highest shot with the given max speed:
+			// Tiro mais alto com a velocidade máxima:
 			//float time_max = Mathf.Sqrt((launchData.b + discRoot) * 2f / launchData.gSquared);
 
-			// Most direct shot with the given max speed:
+			// Tiro mais direto com a velocidade máxima:
 			//float time_min = Mathf.Sqrt((launchData.b - discRoot) * 2f / launchData.gSquared);
 
-			// Lowest-speed arc available:
+			// Tiro com a menor velocidade possível:
 			float time_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(launchData.toTarget.sqrMagnitude * 4f / launchData.gSquared));
 
 			float time = time_lowEnergy; // choose T_max, T_min, or some T in-between like T_lowEnergy
 
-			// Convert from time-to-target to a launch velocity:
+			// Converte o tempo até o alvo para a velocidade de lançamento:
 			launchData.velocity = launchData.toTarget / time - Physics.gravity * time / 2f;
 
 			targetTextureInst.GetComponentInChildren<Light>().color = Color.cyan;

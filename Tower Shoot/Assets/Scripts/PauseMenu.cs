@@ -11,8 +11,12 @@ public class PauseMenu : MonoBehaviour {
 	[HideInInspector]
 	public int DropdownIndex;
 
+	AudioManager AM;
+
 	private void Awake()
 	{
+		AM = FindObjectOfType<AudioManager>();
+
 		QualitySettings.vSyncCount = 1;
 		SetQualityLevel(3);
 	}
@@ -34,6 +38,9 @@ public class PauseMenu : MonoBehaviour {
 		GameIsPaused = false;
 		PauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
+
+		AM.Play("Rain");
+		AM.Play("Heavy Rain");
 	}
 
 	public void Pause()
@@ -42,6 +49,9 @@ public class PauseMenu : MonoBehaviour {
 		GameIsPaused = true;
 		PauseMenuUI.SetActive(true);
 		Time.timeScale = 0f;
+
+		AM.Pause("Rain");
+		AM.Pause("Heavy Rain");
 	}
 
 	public void set30FPS()

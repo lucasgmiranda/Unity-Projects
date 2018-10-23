@@ -26,7 +26,6 @@ public class CanonRotation : MonoBehaviour
 		//transform.LookAt(towerTargetLook);
 
 		Vector3 towerMainTarget = new Vector3(LA.canonTargetLook.x, transform.position.y, LA.canonTargetLook.z);
-		Vector3 barrelMainTarget = new Vector3(barrelMain.position.x, LA.canonTargetLook.y, LA.canonTargetLook.z);
 
 		transform.LookAt(towerMainTarget);
 		barrelMain.LookAt(LA.canonTargetLook);

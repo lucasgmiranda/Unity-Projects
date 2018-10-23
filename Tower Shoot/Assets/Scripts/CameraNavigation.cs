@@ -7,6 +7,7 @@ public class CameraNavigation : MonoBehaviour {
 	private Transform myCamera;
 	private Transform cameraRig02, cameraRig01;
 	private Vector3 _LocalRotation;
+	private Compass CP;
 	
 	[Header("Orbit")]
 	public float OrbitSensitivity = 4f;
@@ -25,6 +26,7 @@ public class CameraNavigation : MonoBehaviour {
 
 	void Start () 
 	{
+		CP = GameObject.Find("Compass").GetComponent<Compass>();
 		myCamera = transform;
 		cameraRig02 = transform.parent;
 		cameraRig01 = cameraRig02.transform.parent;
@@ -32,22 +34,25 @@ public class CameraNavigation : MonoBehaviour {
 	}
 
 	void FixedUpdate()
-	{
-		if (Input.touchCount == 2)
+	{		
+		if(!CP.compassHit)
 		{
-			SetRotationFinger();
-			if(!EventSystem.current.IsPointerOverGameObject(rotationFinger))
-				cameraRotation();
-		}
+			if (Input.touchCount == 2)
+			{
+				SetRotationFinger();
+				if(!EventSystem.current.IsPointerOverGameObject(rotationFinger))
+					cameraRotation();
+			}
 
-		if (Input.touchCount == 1)
-		{
-			rotationFinger = 0;
-			if (!EventSystem.current.IsPointerOverGameObject(rotationFinger))
-				cameraRotation();
-		}
+			if (Input.touchCount == 1)
+			{
+				rotationFinger = 0;
+				if (!EventSystem.current.IsPointerOverGameObject(rotationFinger))
+					cameraRotation();
+			}
 
-		cameraRigTransform();
+			cameraRigTransform();
+		}
 	}
 
 	void cameraRotation()

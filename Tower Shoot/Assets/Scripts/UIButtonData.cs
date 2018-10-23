@@ -19,19 +19,6 @@ public class UIButtonData : EventTrigger {
 
 	public bool _switch, _hold, _pointer, _click;
 
-	int cont = 0;
-
-	private void Update()
-	{
-		if(cont == 1 && _click)
-		{
-			cont = 0;
-			_click = false;
-		}
-		if (cont == 0 && _click)
-			cont++;
-	}
-
 	public override void OnPointerDown(PointerEventData data)
 	{
 		_switch = !_switch;

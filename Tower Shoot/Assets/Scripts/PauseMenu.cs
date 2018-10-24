@@ -54,14 +54,17 @@ public class PauseMenu : MonoBehaviour {
 		AM.Pause("Heavy Rain");
 	}
 
-	public void set30FPS()
+	public void setFPS(int value)
 	{
-		QualitySettings.vSyncCount = 2;
+		if(value == 0) 	QualitySettings.vSyncCount = 2;
+		else	QualitySettings.vSyncCount = 1;
 	}
-
-	public void set60FPS()
+	
+	public void SetQualityLevel(int index)
 	{
-		QualitySettings.vSyncCount = 1;
+		int vSync = QualitySettings.vSyncCount;
+		QualitySettings.SetQualityLevel(index);
+		QualitySettings.vSyncCount = vSync;
 	}
 
 	public void Quit()
@@ -69,10 +72,6 @@ public class PauseMenu : MonoBehaviour {
 		Application.Quit();
 	}
 
-	public void SetQualityLevel(int index)
-	{
-		QualitySettings.SetQualityLevel(index);
-	}
 
 	public void EnableObjects()
 	{

@@ -1,37 +1,26 @@
 fileFormatVersion: 2
-guid: 0cbe2970b56ceef4caba8442ca2137d6
+guid: 6967b05f0f8244d4eac79259ca5529a7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Barrel_Base
-    100002: Barrel_Main
-    100004: Barrel_Top
-    100006: Canon
-    100008: //RootNode
-    100010: Canon_Base
-    100012: Tower_Base
-    400000: Barrel_Base
-    400002: Barrel_Main
-    400004: Barrel_Top
-    400006: Canon
-    400008: //RootNode
-    400010: Canon_Base
-    400012: Tower_Base
+    100000: //RootNode
+    100002: pCylinder1
+    400000: //RootNode
+    400002: pCylinder1
     2100000: lambert1
-    2100002: lambert2
-    2300000: Barrel_Base
-    2300002: Barrel_Top
-    2300004: Canon_Base
-    2300006: Tower_Base
-    3300000: Barrel_Base
-    3300002: Barrel_Top
-    3300004: Canon_Base
-    3300006: Tower_Base
-    4300000: Barrel_Top
-    4300002: Barrel_Base
-    4300004: Canon_Base
-    4300006: Tower_Base
-  externalObjects: {}
+    2300000: //RootNode
+    2300002: pCylinder1
+    3300000: //RootNode
+    3300002: pCylinder1
+    4300000: Gear_8Cogs
+    4300002: pGear2
+    4300004: pCylinder1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: d5594d07897fa3f4bbcfb3978856342c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -67,10 +56,10 @@ ModelImporter:
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -89,7 +78,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

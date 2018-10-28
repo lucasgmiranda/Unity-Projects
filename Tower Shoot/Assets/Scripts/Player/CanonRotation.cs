@@ -22,9 +22,6 @@ public class CanonRotation : MonoBehaviour
 
 	void LateUpdate()
 	{		
-		//Vector3 towerTargetLook = new Vector3(FP.targetHit.point.x, transform.position.y, FP.targetHit.point.z);
-		//transform.LookAt(towerTargetLook);
-
 		Vector3 towerMainTarget = new Vector3(LA.canonTargetLook.x, transform.position.y, LA.canonTargetLook.z);
 
 		transform.LookAt(towerMainTarget);

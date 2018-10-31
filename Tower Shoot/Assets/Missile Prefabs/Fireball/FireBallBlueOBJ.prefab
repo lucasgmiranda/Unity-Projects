@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 10
   explosionPower: 10
-  radius: 5
+  radius: 7.5
   upForce: 1
   impactParticle: {fileID: 193692, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 2}
   projectileParticle: {fileID: 110298, guid: deec2987c8cae8c4a97dea31b6ddb2c5, type: 2}

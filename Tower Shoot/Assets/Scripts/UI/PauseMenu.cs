@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 
@@ -41,6 +42,11 @@ public class PauseMenu : MonoBehaviour {
 
 		AM.Play("Rain");
 		AM.Play("Heavy Rain");
+	}
+
+	public void Restart()
+	{
+		SceneManager.LoadScene("Scene01");
 	}
 
 	public void Pause()

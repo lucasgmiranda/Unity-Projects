@@ -86,7 +86,6 @@ public class FireProjectileV2 : MonoBehaviour
 	void Launch()
 	{
 		GameObject projectile = Instantiate(projectiles[currentProjectile], transform.position, Quaternion.identity) as GameObject;
-		// Apply the calculated velocity (do not use force, acceleration, or impulse modes)
 		projectile.GetComponent<Rigidbody>().AddForce(launchData.velocity, ForceMode.VelocityChange);			
 	}
 
@@ -103,7 +102,6 @@ public class FireProjectileV2 : MonoBehaviour
 
 		launchData.toTarget = targetHit.point - transform.position;
 
-		// Set up the terms we need to solve the quadratic equations.
 		launchData.gravitySquared = Physics.gravity.sqrMagnitude;
 		launchData.b = speed * speed + Vector3.Dot(launchData.toTarget, Physics.gravity);
 		launchData.discriminant = launchData.b * launchData.b - launchData.gravitySquared * launchData.toTarget.sqrMagnitude;

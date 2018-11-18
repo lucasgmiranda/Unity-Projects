@@ -12,10 +12,12 @@ public class PauseMenu : MonoBehaviour {
 	[HideInInspector]
 	public int DropdownIndex;
 
+	ConfigButtonsUI CB;
 	AudioManager AM;
 
 	private void Awake()
 	{
+		CB = FindObjectOfType<ConfigButtonsUI>();
 		AM = FindObjectOfType<AudioManager>();
 
 		QualitySettings.vSyncCount = 1;
@@ -51,6 +53,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public void Pause()
 	{
+		CB.DisableAllButtons();
 		DisableObjects();
 		GameIsPaused = true;
 		PauseMenuUI.SetActive(true);

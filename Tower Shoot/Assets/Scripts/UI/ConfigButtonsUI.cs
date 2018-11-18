@@ -76,4 +76,12 @@ public class ConfigButtonsUI : MonoBehaviour
 		Debug.LogError("Button not find");
 		return null;
 	}
+
+	public void DisableAllButtons()
+	{
+		foreach (var button in configButtons)
+		{
+			button.buttonData.DisableSwitch();
+		}
+	}
 }

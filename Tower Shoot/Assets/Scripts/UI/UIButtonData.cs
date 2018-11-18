@@ -52,4 +52,10 @@ public class UIButtonData : EventTrigger {
 	{
 		_pointer = false;
 	}
+
+	public void DisableSwitch()
+	{
+		_switch = false;
+		GetComponent<Image>().overrideSprite = disabledSprite;
+	}
 }
